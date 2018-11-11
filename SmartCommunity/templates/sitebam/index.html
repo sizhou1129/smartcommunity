@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../../static/jquery/jquery-3.3.1.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#id_post").click(function(){
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+        });
+        $.post("/sitebam/login",
+        {
+          account :"sizhou",
+          pwd :"123"
+        },
+        function(data,status){
+          alert("POST数据：" + data.status + "\n状态：" + status);
+        });
+      });
+      $("#id_get").click(function(){
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+        });
+        $.get("/example/jquery/demo_test.asp",
+         {
+          account :"sizhou",
+          pwd :"123"
+          },
+         function(data,status){
+          alert("GET数据：" + data + "\n状态：" + status);
+        });
+      });
+
+    });
+    </script>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<button id="id_get">发送get请求</button>
+<button id="id_post">发送post请求</button>
+</body>
+</html>
